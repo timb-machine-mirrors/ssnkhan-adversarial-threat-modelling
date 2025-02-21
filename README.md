@@ -112,25 +112,53 @@ alias stopvectr="cd /opt/vectr && sudo docker compose down"
 
 ```
 
+## Upgrading VECTR
+VECTR is actively maintained, with new features and bug fixes being made available throughout the year. In most cases, upgrading VECTR is as simple as replacing the existing `docker-compose.yml` file within your installation directory (usually `/opt/vectr`), with its newer version — published under the [Releases](https://github.com/SecurityRiskAdvisors/VECTR/releases) section of VECTR’s Github repository.
+
+
+```
+
+# Safely shut down VECTR
+cd /opt/vectr && sudo docker-compose down
+
+
+# Download the latest .zip release package via your browser
+# https://github.com/SecurityRiskAdvisors/VECTR/releases
+# e.g., sra-vectr-runtime-9.6.5-ce.zip
+
+
+# Extract, optionally inspect docker-compose.yml
+unzip ~/Downloads/sra-vectr-runtime-9.6.5-ce.zip
+cat docker-compose.yml
+
+
+# Move the new docker file to your VECTR install directory, and deploy
+sudo mv ./docker-compose.yml /opt/vectr
+sudo docker compose up -d
+
+```
+
 ___
 
 
 ## Exercises
 ### Importing Existing Datasets
+1. [SRA Threat Simulation Index](https://github.com/SecurityRiskAdvisors/indexes)
+2. [SRA Iran TTPs](https://github.com/SecurityRiskAdvisors/VECTR/blob/master/cti/Iranian_TTP_Bundle_010920.json)
+
 _Not recommended for production deployments!_
-1. [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/Indexes/index.yaml)
-2. [MITRE Enterprise ATT&CK CTI Bundle](https://github.com/mitre/cti/blob/master/enterprise-attack/enterprise-attack.json)
-3. [SRA Iran TTPs](https://github.com/SecurityRiskAdvisors/VECTR/blob/master/cti/Iranian_TTP_Bundle_010920.json)
+
+3. [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/Indexes/index.yaml)
+4. [MITRE Enterprise ATT&CK CTI Bundle](https://github.com/mitre/cti/blob/master/enterprise-attack/enterprise-attack.json)
 
 
 ### Developing your Threat Library
-> Creating your own adversary emulation plan draws on the greatest strength of combining red teaming with your own threat intelligence: the behaviors are seen from real-world adversaries targeting you! — _Mitre_
+> Creating your own adversary emulation plan draws on the greatest strength of combining red teaming with your own threat intelligence: the behaviors are seen from real-world adversaries targeting you! — _MITRE_
 
 
 1. [Malpedia](https://malpedia.caad.fkie.fraunhofer.de)
 2. [MITRE Engenuity Adversary Emulation Library](https://mitre-engenuity.org/cybersecurity/center-for-threat-informed-defense/adversary-emulation-library/)
 3. [APT & Cybercriminals Campaign Collection](https://github.com/CyberMonitor/APT_CyberCriminal_Campagin_Collections)
-4. [Palo Alto Networks Unit 42 Playbooks](https://pan-unit42.github.io/playbook_viewer/)
 
 
 ### Generating Insights Using `ipysigma`/Gephi
