@@ -14,7 +14,7 @@ by Sajid Nawaz Khan, _Principal Cyber Threat Intelligence Analyst_
 
 ___
 
-**UPDATED**: This README is designed to support the above workshop, originally titled _Adversarial Threat Modelling — A Practical Approach to Purple Teaming in the Enterprise_, which took place on Friday 11th September 2020 as part of [x33fcon](https://www.x33fcon.com/), and which was significantly refreshed and revised in September 2024.
+**UPDATED**: This README is designed to support the above workshop, originally titled _Adversarial Threat Modelling — A Practical Approach to Purple Teaming in the Enterprise_, which took place on Friday 11th September 2020 as part of [x33fcon](https://www.x33fcon.com/), and which was significantly refreshed and revised in September 2024, and again in February 2025.
 
 
 ## System Requirements
@@ -22,7 +22,7 @@ Please ensure you have installed [VirtualBox](https://www.virtualbox.org) (or yo
 
 
 ## Installing VECTR
-Detailed installation instructions are available on the [VECTR Documentation](https://docs.vectr.io) site. The code below is provided for convenience, and is correct for version 9.6.5 of the Community Edition.
+Detailed installation instructions are available on the [VECTR Documentation](https://docs.vectr.io) site. The code below is provided for convenience, and is correct for version 9.8.1 of the Community Edition.
 
 
 ### Installing Dependencies
@@ -58,8 +58,8 @@ To minimise issues during the workshop, please continue with default configurati
 
 sudo mkdir -p /opt/vectr && cd /opt/vectr
 
-sudo wget https://github.com/SecurityRiskAdvisors/VECTR/releases/download/ce-9.6.5/sra-vectr-runtime-9.6.5-ce.zip 
-sudo unzip sra-vectr-runtime-9.6.5-ce.zip
+sudo wget https://github.com/SecurityRiskAdvisors/VECTR/releases/download/ce-9.8.1/sra-vectr-runtime-9.8.1-ce.zip 
+sudo unzip sra-vectr-runtime-9.8.1-ce.zip
 
 ```
 
@@ -68,8 +68,7 @@ For a default install, add `sravectr.internal` to your hosts file as follows:
 
 ```
 
-sudo nano /etc/hosts
-127.0.0.1   localhost   sravectr.internal
+echo "127.0.0.1 sravectr.internal" | sudo tee -a /etc/hosts
 
 ```
 
@@ -96,7 +95,7 @@ You should be able to access VECTR at https://sravectr.internal:8081/. The defau
 ```
 
 cd /opt/vectr
-sudo docker-compose down
+sudo docker compose down
 
 ```
 
@@ -104,11 +103,9 @@ sudo docker-compose down
 ### Add Bash Aliases (Optional)
 ```
 
-nano ~/.bashrc
-
-# Add these entries
-alias startvectr="cd /opt/vectr && sudo docker compose up -d"
-alias stopvectr="cd /opt/vectr && sudo docker compose down"
+# Start a new Terminal after adding these aliases
+echo 'alias startvectr="cd /opt/vectr && sudo docker compose up -d"' | tee -a ~/.bashrc
+echo 'alias stopvectr="cd /opt/vectr && sudo docker compose down"' | tee -a ~/.bashrc
 
 ```
 
@@ -119,16 +116,16 @@ VECTR is actively maintained, with new features and bug fixes being made availab
 ```
 
 # Safely shut down VECTR
-cd /opt/vectr && sudo docker-compose down
+cd /opt/vectr && sudo docker compose down
 
 
 # Download the latest .zip release package via your browser
 # https://github.com/SecurityRiskAdvisors/VECTR/releases
-# e.g., sra-vectr-runtime-9.6.5-ce.zip
+# e.g., sra-vectr-runtime-9.8.1-ce.zip
 
 
 # Extract, optionally inspect docker-compose.yml
-unzip ~/Downloads/sra-vectr-runtime-9.6.5-ce.zip
+unzip ~/Downloads/sra-vectr-runtime-9.8.1-ce.zip
 cat docker-compose.yml
 
 
